@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Joga is a full-stack humanoid soccer system that closes the sim-to-real gap in perception and dynamics to learn agile dribbling, shooting, passing, and receiving with active vision.">
+  <meta name="keywords" content="Robotics, Humanoids, Soccer, Active Vision, Reinforcement Learning, Sim-to-Real Transfer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Joga: Learning Agile Humanoid Soccer Skills with Active Vision</title>
+
+  <link rel="icon" type="image/x-icon" href="./static/images/favicon.ico">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/index.css?v=joga-1">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script defer src="./static/js/index.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#overview">Skip to paper overview</a>
+
+  <header class="hero is-link is-fullheight video publication-hero">
+    <!-- TODO: replace placeholder teaser videos with Joga footage -->
+    <div class="hero-video hero-desktop">
+      <video playsinline autoplay muted loop preload="metadata" aria-hidden="true">
+        <source src="./static/videos/teaser.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-video hero-mobile">
+      <video playsinline autoplay muted loop preload="metadata" aria-hidden="true">
+        <source src="./static/videos/teaser_vertical.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="hero-head is-hidden-mobile">
+      <nav class="navbar" aria-label="Paper resources">
+        <div class="container is-size-5">
+          <div class="navbar-menu">
+            <div class="navbar-end">
+              <a class="navbar-item px-4" href="./static/joga.pdf">
+                <span class="icon" aria-hidden="true"><i class="fas fa-file-pdf"></i></span>
+                <span>Paper</span>
+              </a>
+              <span class="navbar-item px-4">
+                <span class="button is-inverted is-large" aria-disabled="true">
+                  <span class="icon" aria-hidden="true"><i class="fab fa-github"></i></span>
+                  <span>Code (Coming Soon)</span>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="hero-body">
+      <div class="container has-text-centered publication-hero-content">
+        <h1 class="title publication-title">Joga</h1>
+        <p class="subtitle publication-subtitle">
+          <span class="publication-subtitle-line">Learning Agile Humanoid Soccer Skills</span>
+          <span class="publication-subtitle-line">with Active Vision</span>
+        </p>
+        <div class="publication-links is-hidden-tablet" aria-label="Paper resources">
+          <span class="link-block">
+            <a href="./static/joga.pdf" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon" aria-hidden="true"><i class="fas fa-file-pdf"></i></span>
+              <span>Paper</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <span class="external-link button is-normal is-rounded is-dark" aria-disabled="true">
+              <span class="icon" aria-hidden="true"><i class="fab fa-github"></i></span>
+              <span>Code (Coming Soon)</span>
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-foot is-hidden-mobile">
+      <nav class="tabs is-boxed is-fullwidth is-size-6" aria-label="Page sections">
+        <ul>
+          <li><a href="#skills">Soccer Skills</a></li>
+          <li><a href="#system">System</a></li>
+          <li><a href="#pam">Perception Alignment</a></li>
+          <li><a href="#wb-uan">Whole-Body UAN</a></li>
+          <li><a href="#chaining">Skill Chaining</a></li>
+          <li><a href="#qa">Q &amp; A</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section section--compact team-section" aria-labelledby="team-title">
+      <div class="container is-max-desktop">
+        <h2 id="team-title" class="title is-3 is-size-4-mobile">Our Team</h2>
+        <!-- TODO: author list -->
+        <div class="team-grid">
+        </div>
+        <p class="has-text-centered equal-contribution"><sup>*</sup>Co-first authors</p>
+        <div class="affiliation-logos">
+          <a href="https://www.csail.mit.edu/">
+            <img src="./static/images/csail.png" alt="MIT CSAIL" width="622" height="356">
+          </a>
+          <a href="https://improbableai.com/">
+            <img src="./static/images/improbable.png" alt="Improbable AI Lab" width="405" height="300">
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="overview" aria-labelledby="overview-title">
+      <div class="container is-max-desktop">
+        <div class="content-column">
+          <h2 id="overview-title" class="eyebrow">Paper overview</h2>
+          <p class="lead overview-hook">
+            Joga is a full-stack system for humanoid dribbling, shooting, passing, and receiving. A torso-mounted actuated neck gives the robot active vision, and data-driven alignment of perception and dynamics preserves the speed and precision learned in simulation when the policies run on hardware.
+          </p>
+        </div>
+
+        <div class="metric-grid" aria-label="Key results">
+          <article class="metric-card">
+            <p class="metric-value">2.31 m/s</p>
+            <p class="metric-label">peak dribbling speed on hardware</p>
+          </article>
+          <article class="metric-card">
+            <p class="metric-value">10 min</p>
+            <p class="metric-label">of hardware data per alignment model</p>
+          </article>
+          <article class="metric-card">
+            <p class="metric-value">5/5</p>
+            <p class="metric-label">real-world dribble-to-pass and dribble-to-shoot transitions</p>
+          </article>
+        </div>
+
+        <div class="abstract-block content-column">
+          <h3 class="title is-4">Abstract</h3>
+          <p>
+            Exhibiting human-like agility in object interaction is a long-standing goal in humanoid robotics. Soccer offers a demanding case study, requiring dynamic coordination of perception, locomotion, and foot-ball contacts. Reinforcement learning in simulation is a promising approach for learning agile object interaction because it can directly optimize task outcomes, but sim-to-real gaps in perception and dynamics make transfer to reality challenging. We introduce <strong>Joga</strong> (<strong>J</strong>oint <strong>O</strong>ptimization of <strong>G</strong>aze and <strong>A</strong>ction), a full-stack system for humanoid dribbling, shooting, passing, and receiving that perceives the ball through an RGB camera mounted on a custom 2-DoF actuated neck. Our approach combines hardware design with data-driven model alignment to close the sim-to-real gap. The torso-mounted actuated neck enables rapid and stable active vision, while a learned perception alignment model learns the distributional bias and noise of onboard ball observations to achieve the precision needed for sharp turns and dribbling at high speeds. For dribbling, we further learn a whole-body residual action model from 10 minutes of hardware data and use the corrected simulator to finetune the policy, improving its speed. On hardware, Joga reaches a peak dribbling speed of 2.31 m/s while maintaining more ball controllability than domain-randomization and linear-perception-model baselines. The learned skills can be chained, transitioning from controlled dribbling to shooting or passing, and from receiving an incoming pass to dribbling. Together, these results show how limited real-world data and targeted modeling can preserve agile humanoid object interaction learned entirely in simulation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--compact" id="video" aria-labelledby="video-title">
+      <div class="container is-max-desktop">
+        <h2 id="video-title" class="title is-2 has-text-centered is-size-4-mobile">Technical Summary</h2>
+        <!-- TODO: replace placeholder video -->
+        <figure class="media-figure media-figure--framed">
+          <video controls playsinline preload="metadata" aria-label="Technical summary of Joga">
+            <source src="./static/videos/technical_summary.mp4" type="video/mp4">
+          </video>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="container is-max-desktop">
+        <div class="content-column">
+          <p class="eyebrow">Real-world skills</p>
+          <h2 id="skills-title" class="title is-1 is-size-3-mobile">Four agile soccer skills, all 31 actuators, onboard sensing only</h2>
+          <div class="content">
+            <p>
+              On a Unitree G1, each skill policy jointly controls the whole body and the neck, coordinating where the robot looks with how it moves. <strong>Dribbling</strong> repeatedly redirects a moving ball while locomoting; <strong>shooting</strong> and <strong>passing</strong> impart directed impulses; <strong>receiving</strong> brings an incoming ball under control so it can be kept for subsequent play. At deployment the robot relies only on its onboard camera and proprioception.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODO: replace placeholder videos with Joga skill footage -->
+      <div class="task-media-layout">
+        <figure class="media-tile media-tile--tall">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="High-speed humanoid dribbling">
+            <source src="./static/videos/dribble_high_speed.mp4" type="video/mp4">
+          </video>
+          <figcaption>High-speed dribbling: 1.71 &plusmn; 0.16 m/s sustained, 2.31 m/s peak</figcaption>
+        </figure>
+        <div class="task-media-grid">
+          <figure class="media-tile">
+            <video autoplay muted loop playsinline controls preload="metadata" aria-label="Receiving a fast incoming pass with a single first touch">
+              <source src="./static/videos/receive_first_touch.mp4" type="video/mp4">
+            </video>
+            <figcaption>Receiving a 5.2 m/s pass with a single first touch</figcaption>
+          </figure>
+          <figure class="media-tile">
+            <video autoplay muted loop playsinline controls preload="metadata" aria-label="Dribbling from 10 meters away and shooting into the goal">
+              <source src="./static/videos/dribble_to_shoot.mp4" type="video/mp4">
+            </video>
+            <figcaption>Dribble 10 m, then shoot at a commanded 10 m/s</figcaption>
+          </figure>
+          <figure class="media-tile">
+            <video autoplay muted loop playsinline controls preload="metadata" aria-label="Dribbling into a directed pass">
+              <source src="./static/videos/dribble_to_pass.mp4" type="video/mp4">
+            </video>
+            <figcaption>Dribble-to-pass transition</figcaption>
+          </figure>
+          <figure class="media-tile">
+            <video autoplay muted loop playsinline controls preload="metadata" aria-label="Sharp 135 degree dribbling turn">
+              <source src="./static/videos/dribble_sharp_turn.mp4" type="video/mp4">
+            </video>
+            <figcaption>Sharp 135&deg; turns while dribbling</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tinted" id="problem" aria-labelledby="problem-title">
+      <div class="container is-max-desktop">
+        <div class="content-column">
+          <p class="eyebrow">The problem</p>
+          <h2 id="problem-title" class="title is-1 is-size-3-mobile">Small errors in sight and motion break precise foot-ball contact</h2>
+          <div class="content">
+            <p>
+              Reinforcement learning lets whole-body strategies emerge from task objectives such as &ldquo;dribble forward at 2 m/s&rdquo; or &ldquo;pass 30&deg; right at 5 m/s,&rdquo; and parallel simulation makes the required trial and error practical. But the simulator is not the robot. The ball must stay in view as the robot accelerates and turns, and even when it is visible, onboard detections carry bias and noise that depend on both the ball's position and the robot's motion. On the actuation side, parallel-linkage mechanisms introduce configuration-dependent coupling and reflected inertia, and shared power limits can make available torque depend on whole-body demand.
+            </p>
+            <p>
+              Domain randomization can tolerate these discrepancies, but overly broad randomization favors slow, conservative strategies that work across many simulated systems rather than the one real robot. Joga instead improves the fidelity of the nominal system using limited real-world data, and keeps targeted randomization only for remaining variability in terrain, ball, and scene.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODO: replace placeholder videos with baseline failure footage -->
+      <div class="full-bleed-media two-up-media">
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Baseline policy losing the ball due to perception mismatch">
+            <source src="./static/videos/baseline_perception_fail.mp4" type="video/mp4">
+          </video>
+          <figcaption>Baseline: perception mismatch during fast motion</figcaption>
+        </figure>
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Baseline policy with conservative, slow dribbling">
+            <source src="./static/videos/baseline_conservative.mp4" type="video/mp4">
+          </video>
+          <figcaption>Baseline: conservative dribbling under broad randomization</figcaption>
+        </figure>
+      </div>
+
+      <div class="question-band">
+        <p>How can we preserve the speed, precision, and fluidity learned in simulation when a humanoid plays soccer in the real world?</p>
+      </div>
+    </section>
+
+    <section class="section" id="system" aria-labelledby="system-title">
+      <div class="container is-max-desktop">
+        <div class="content-column">
+          <p class="eyebrow">The system</p>
+          <h2 id="system-title" class="title is-1 is-size-3-mobile">Joga: close both sides of the sensing-action loop</h2>
+        </div>
+
+        <ol class="method-steps">
+          <li>
+            <span class="step-number">1</span>
+            <div>
+              <h3>Active vision hardware</h3>
+              <p>A custom torso-mounted 2-DoF neck carries an RGB camera for rapid, stable gaze changes during fast locomotion.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">2</span>
+            <div>
+              <h3>Perception alignment model</h3>
+              <p>Learn the state-dependent bias, noise, and dropout of onboard ball detection from paired detector and motion-capture data.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">3</span>
+            <div>
+              <h3>Whole-body actuator network</h3>
+              <p>Learn joint-position command corrections from 10 minutes of hardware dribbling, then finetune the dribbling policy in the corrected simulator.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">4</span>
+            <div>
+              <h3>Distributional skill chaining</h3>
+              <p>Finetune passing and shooting from states visited during dribbling so skills hand off mid-stride.</p>
+            </div>
+          </li>
+        </ol>
+
+        <!-- TODO: add Joga system diagram (paper Fig. 2) -->
+        <figure class="paper-figure">
+          <div class="figure-placeholder" role="img" aria-label="Placeholder for the Joga system diagram">
+            System diagram coming soon
+          </div>
+          <figcaption>
+            (a) Train the PAM on paired detector bounding boxes, proprioception, and motion capture. (b) Train the WB-UAN on proprioceptive replay data to align simulated and real actuation. (c) Train soccer skill policies in the aligned simulator; finetune dribbling with the WB-UAN for high speeds, and finetune passing and shooting from dribbling states for skill chaining.
+          </figcaption>
+        </figure>
+
+        <div class="content-column content">
+          <h3 class="title is-4">A neck built for the sim-to-real gap</h3>
+          <p>
+            The neck mounts directly to the torso and is driven by two DYNAMIXEL XC330-M288-T servos. It deliberately avoids external linkages, gears, and bearings: more complex transmissions introduce backlash, compliance, slippage, and calibration error, which slow the neck down and widen the sim-to-real gap. The simple design gives a large range of motion and speed for tracking the ball through robot and ball motion, and after a simple system identification it needs <strong>no neck domain randomization</strong> during policy training.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tinted" id="pam" aria-labelledby="pam-title">
+      <div class="container is-max-desktop">
+        <div class="content-column">
+          <p class="eyebrow">Perception alignment</p>
+          <h2 id="pam-title" class="title is-1 is-size-3-mobile">Learn what the camera actually sees</h2>
+          <div class="content">
+            <p>
+              The policy observes the ball position back-projected from the detector's 2D bounding box through a pinhole model. Despite intrinsic and hand-eye calibration, this estimate carries systematic, state-dependent errors that simulation lacks: depth is biased because the camera is not a perfect pinhole, noise grows with range and extrinsic mismatch, and the detector drops out at a range-dependent rate.
+            </p>
+            <p>
+              The <strong>Perception Alignment Model (PAM)</strong> replaces perception domain randomization entirely. Working in bounding-box space, so it mirrors the real vision pipeline, it predicts a heteroscedastic Gaussian over the box residual plus a visibility probability, conditioned on the true ball position, base angular velocity, neck and waist joint velocities, projected gravity, and the ball position in the base frame. PAM is trained on 10 minutes of paired onboard detections and motion-capture labels, then frozen and sampled at every control step during policy training.
+            </p>
+            <p>
+              The learned error structure is far from isotropic: depth bias is about <strong>+5 cm</strong> at dribbling range and changes sign beyond roughly 2 m, noise grows with both range and ego-motion, and dropout rises from a few percent at close range to <strong>over 30%</strong> at 2.5 m.
+            </p>
+          </div>
+        </div>
+
+        <figure class="media-figure media-figure--framed">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Visualization of the perception alignment model">
+            <source src="./static/videos/pam_visualization.mp4" type="video/mp4">
+          </video>
+        </figure>
+
+        <div class="state-figure-grid">
+          <!-- TODO: add PAM fit figure (paper Fig. 3a) -->
+          <figure class="paper-figure paper-figure--plain">
+            <div class="figure-placeholder" role="img" aria-label="Placeholder for PAM fitting results">
+              PAM fitting figure coming soon
+            </div>
+            <figcaption>On held-out hardware data, PAM captures the bias and noise of onboard ball detection against both range and ego-motion; linear and DR baselines under- or over-estimate it.</figcaption>
+          </figure>
+          <figure class="paper-figure paper-figure--plain">
+            <table class="results-table">
+              <caption>Real-world square steering success</caption>
+              <thead>
+                <tr><th scope="col">Policy</th><th scope="col">Success</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>DR</td><td>3/4</td></tr>
+                <tr><td>Linear</td><td>1/4</td></tr>
+                <tr class="is-ours"><td>PAM</td><td>4/4</td></tr>
+              </tbody>
+            </table>
+            <figcaption>An operator, blind to the policy, joysticks the robot to dribble a 5 m square.</figcaption>
+          </figure>
+        </div>
+
+        <div class="content-column content">
+          <p>
+            To stress-test the benefit, we train policies in a base simulator and deploy them in a target simulator with a large perception gap: a miscalibrated pinhole model, a 5% focal-length error, a principal-point shift, lens distortion, and a small extrinsic offset. The PAM policy nearly matches an oracle trained directly in the target environment, while DR and linear-model policies degrade as the course gets harder.
+          </p>
+        </div>
+
+        <table class="results-table results-table--wide">
+          <caption>Sim-to-sim course tracking (%, higher is better, 5 seeds)</caption>
+          <thead>
+            <tr><th scope="col">Policy</th><th scope="col">Easy (45&deg;)</th><th scope="col">Medium (90&deg;)</th><th scope="col">Hard (180&deg;)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>DR</td><td>77.5 &plusmn; 0.5</td><td>53.0 &plusmn; 0.4</td><td>29.9 &plusmn; 0.5</td></tr>
+            <tr><td>Linear</td><td>76.9 &plusmn; 0.3</td><td>54.5 &plusmn; 0.5</td><td>33.5 &plusmn; 0.3</td></tr>
+            <tr class="is-ours"><td>PAM</td><td>86.7 &plusmn; 0.4</td><td>69.2 &plusmn; 0.2</td><td>57.4 &plusmn; 0.4</td></tr>
+            <tr class="is-muted"><td>Oracle</td><td>89.4 &plusmn; 0.3</td><td>70.9 &plusmn; 0.3</td><td>58.0 &plusmn; 0.3</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TODO: replace placeholder videos with square-steering footage -->
+      <div class="full-bleed-media three-up-media">
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Square steering with the domain randomization policy">
+            <source src="./static/videos/square_dr.mp4" type="video/mp4">
+          </video>
+          <figcaption>DR policy</figcaption>
+        </figure>
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Square steering with the linear perception model policy">
+            <source src="./static/videos/square_linear.mp4" type="video/mp4">
+          </video>
+          <figcaption>Linear perception model policy</figcaption>
+        </figure>
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Square steering with the PAM policy">
+            <source src="./static/videos/square_pam.mp4" type="video/mp4">
+          </video>
+          <figcaption>PAM policy</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="wb-uan" aria-labelledby="wb-uan-title">
+      <div class="container is-max-desktop">
+        <div class="content-column">
+          <p class="eyebrow">Dynamics alignment</p>
+          <h2 id="wb-uan-title" class="title is-1 is-size-3-mobile">A whole-body residual for agile dribbling</h2>
+          <div class="content">
+            <p>
+              Accurate perception is not enough if the simulator mispredicts the motion produced by the policy's commands. Actuation discrepancies on a humanoid can depend on the configuration, motion, and commands of many joints at once, so the <strong>Whole-Body Unsupervised Actuator Network (WB-UAN)</strong> extends the joint-local residual of Contact-UAN to a single network conditioned on the whole body. It predicts a correction to the joint-position target:
+            </p>
+          </div>
+          <p class="equation" aria-label="delta q at time t equals mu of o t; next state equals simulator of state and q base plus delta q">
+            <var>&delta;q</var><sub>t</sub> = <var>&mu;</var>(<var>o</var><sub>t</sub>), &nbsp;&nbsp;
+            <var>s</var><sub>t+1</sub> = <var>f</var><sub>sim</sub>(<var>s</var><sub>t</sub>, <var>q</var><sub>t</sub><sup>base</sup> + <var>&delta;q</var><sub>t</sub>).
+          </p>
+          <div class="content">
+            <p>
+              The simulator's rigid-body dynamics, contact solver, and integration are kept intact; only the actuator input is corrected. WB-UAN observes a causal history of absolute joint positions, velocities, and uncorrected targets across the entire body. It is fit with PPO on short replays of 10 minutes of hardware dribbling, each initialized with Contact-UAN's contact-consistent reset, so it needs neither torque labels, motion capture, nor gradients through the simulator. The dribbling policy is then finetuned in the frozen, corrected simulator; only the policy runs on the robot.
+            </p>
+          </div>
+        </div>
+
+        <div class="results-grid">
+          <table class="results-table">
+            <caption>Hardware replay rollout RMSE</caption>
+            <thead>
+              <tr><th scope="col">Model</th><th scope="col">Train</th><th scope="col">Test</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>No residual</td><td>0.0879</td><td>0.0885</td></tr>
+              <tr><td>Contact-UAN</td><td>0.0495</td><td>0.0472</td></tr>
+              <tr class="is-ours"><td>WB-UAN</td><td>0.0379</td><td>0.0495</td></tr>
+            </tbody>
+          </table>
+          <table class="results-table">
+            <caption>Sharp 135&deg; turns at 1.2 m/s</caption>
+            <thead>
+              <tr><th scope="col">Policy</th><th scope="col">Success</th><th scope="col">Dir. error (&deg;)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>DR</td><td>3/5</td><td>&minus;18.1 &plusmn; 4.5</td></tr>
+              <tr><td>Linear</td><td>4/5</td><td>&minus;16.3 &plusmn; 12.0</td></tr>
+              <tr><td>PAM</td><td>4/5</td><td>&minus;15.6 &plusmn; 13.7</td></tr>
+              <tr class="is-ours"><td>PAM + WB-UAN</td><td>5/5</td><td>&minus;14.5 &plusmn; 3.4</td></tr>
+            </tbody>
+          </table>
+          <table class="results-table">
+            <caption>High-speed dribbling over 7 m</caption>
+            <thead>
+              <tr><th scope="col">Policy</th><th scope="col">Success</th><th scope="col">Avg. (m/s)</th><th scope="col">Peak (m/s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>PAM</td><td>5/11</td><td>1.35 &plusmn; 0.20</td><td>1.56</td></tr>
+              <tr class="is-ours"><td>PAM + WB-UAN</td><td>5/5</td><td>1.71 &plusmn; 0.16</td><td>2.31</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="content-column content">
+          <p>
+            With corrected actuator dynamics, the dribbling policy is the most stable and precise on sharp turns and pushes both sustained and peak ball speed well above the PAM-only policy, while remaining easier for a blind operator to control.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tinted" id="chaining" aria-labelledby="chaining-title">
+      <div class="container is-max-desktop">
+        <div class="content-column">
+          <p class="eyebrow">Skill chaining</p>
+          <h2 id="chaining-title" class="title is-1 is-size-3-mobile">Strike from mid-stride, not from a standstill</h2>
+          <div class="content">
+            <p>
+              A passing or shooting policy trained from a stationary reset may succeed in isolation yet fail when invoked during dribbling, with the robot mid-stride and the ball already moving. We roll out the dribbling policy in simulation, collect a bank of robot and ball states (including velocities, so gait phase and ball motion are preserved), and finetune the passing and shooting policies from states sampled uniformly from this bank. The dribbling policy stays fixed, and at deployment control simply switches to the striking policy from whatever state the robot and ball are in.
+            </p>
+            <p>
+              In simulation, finetuning over the dribbling state distribution reduces missed strikes, falls, and strike speed and heading errors. On hardware, chaining alone reaches 4/5 on dribble-to-pass and 3/5 on the harder dribble-to-shoot; combined with PAM and WB-UAN, both reach 5/5.
+            </p>
+          </div>
+        </div>
+
+        <table class="results-table results-table--narrow">
+          <caption>Real-world skill transitions (successes out of 5 trials)</caption>
+          <thead>
+            <tr><th scope="col">Policy</th><th scope="col">Dribble &rarr; pass</th><th scope="col">Dribble &rarr; shoot</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Chaining only</td><td>4/5</td><td>3/5</td></tr>
+            <tr class="is-ours"><td>Chaining + PAM + WB-UAN</td><td>5/5</td><td>5/5</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- <section class="section" id="limitations" aria-labelledby="limitations-title">
+      <div class="container is-max-desktop">
+        <div class="limitations-panel">
+          <div>
+            <p class="eyebrow">Current scope</p>
+            <h2 id="limitations-title" class="title is-2 is-size-4-mobile">Limitations</h2>
+          </div>
+          <p>
+            WB-UAN finetuning is currently applied to dribbling only; passing, shooting, and receiving use the PAM-aligned simulator without a learned actuator residual. Fitting the PAM requires a one-time motion-capture session to label ball positions, although motion capture is not needed at deployment. Skill chaining is demonstrated for transitions out of dribbling into passing and shooting.
+          </p>
+        </div>
+      </div>
+    </section> -->
+
+    <section class="section section--compact" id="qa" aria-labelledby="qa-title">
+      <div class="container is-max-desktop">
+        <div class="content-column">
+          <p class="eyebrow">Questions &amp; answers</p>
+          <h2 id="qa-title" class="title is-1 is-size-3-mobile">Common questions</h2>
+
+          <div class="faq-list">
+            <details open>
+              <summary>What does the name mean?</summary>
+              <p>
+                Joga stands for <strong>J</strong>oint <strong>O</strong>ptimization of <strong>G</strong>aze and <strong>A</strong>ction: each policy controls the neck and the body together. It also nods to &ldquo;joga bonito,&rdquo; Portuguese for &ldquo;play beautifully,&rdquo; a soccer philosophy of creativity, joy, and flair.
+              </p>
+            </details>
+
+            <details>
+              <summary>Why a custom torso-mounted neck?</summary>
+              <p>
+                The robot must keep the ball in view from long-range approaches down to close-range foot contact, including while accelerating and turning. A torso-mounted 2-DoF neck with direct-drive servos changes gaze quickly and reduces jitter, and avoiding linkages and gears removes backlash and compliance that would otherwise need to be randomized in simulation.
+              </p>
+            </details>
+
+            <details>
+              <summary>Why model perception errors in bounding-box space?</summary>
+              <p>
+                The real pipeline goes image &rarr; detector box &rarr; pinhole back-projection. Modeling residuals on the box (center for bearing, log-size for range) and back-projecting reproduces that interface exactly, so a residual in box size maps directly to a relative depth error, just as it does on the robot.
+              </p>
+            </details>
+
+            <details>
+              <summary>How does PAM differ from distance-dependent noise models?</summary>
+              <p>
+                A linear baseline conditions only on range with affine per-axis moments and constant dropout. It captures the mean depth bias but not the motion- and pose-dependent structure, so it overestimates depth noise at close range and stays flat against ego-motion. PAM conditions jointly on ball geometry and robot motion and learns a nonlinear distribution over box errors and visibility.
+              </p>
+            </details>
+
+            <details>
+              <summary>How is WB-UAN different from Contact-UAN?</summary>
+              <p>
+                Contact-UAN learns joint-local corrections from each actuator's own tracking-error history. WB-UAN keeps Contact-UAN's contact-consistent replay and unsupervised fitting, but a single network sees absolute joint positions and commands across the whole body, so each joint's correction can depend on other joints. This better fits recorded hardware trajectories and yields faster, more controllable dribbling.
+              </p>
+            </details>
+
+            <details>
+              <summary>What runs on the robot at deployment?</summary>
+              <p>
+                Only the skill policies, the onboard ball detector, and proprioception. PAM and WB-UAN are simulator-side models used during training, and motion capture is used only to collect PAM training labels.
+              </p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <!-- TODO: contact line -->
+        <p>
+          Page template borrowed from <a href="https://nerfies.github.io/">Nerfies</a> and <a href="https://umi-on-legs.github.io/">UMI on Legs</a>.
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
