@@ -877,3 +877,26 @@ video:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* Full-frame videos (keep legends visible) */
+.media-figure--natural video {
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.media-caption {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 0.75rem auto 2.5rem;
+  max-width: 720px;
+  text-align: center;
+}
+
+.full-bleed-media--joined {
+  margin-top: 2px;
+}
+
+/* Clips cut from the technical summary are 960x444; show them uncropped */
+.full-bleed-media .media-tile video {
+  aspect-ratio: 960 / 444;
+}

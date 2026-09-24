@@ -23,7 +23,6 @@
   <a class="skip-link" href="#overview">Skip to paper overview</a>
 
   <header class="hero is-link is-fullheight video publication-hero">
-    <!-- TODO: replace placeholder teaser videos with Joga footage -->
     <div class="hero-video hero-desktop">
       <video playsinline autoplay muted loop preload="metadata" aria-hidden="true">
         <source src="./static/videos/teaser.mp4" type="video/mp4">
@@ -212,40 +211,39 @@
         </div>
       </div>
 
-      <!-- TODO: replace placeholder videos with Joga skill footage -->
-      <div class="task-media-layout">
-        <figure class="media-tile media-tile--tall">
+      <div class="full-bleed-media two-up-media">
+        <figure class="media-tile">
           <video autoplay muted loop playsinline controls preload="metadata" aria-label="High-speed humanoid dribbling">
             <source src="./static/videos/dribble_high_speed.mp4" type="video/mp4">
           </video>
           <figcaption>High-speed dribbling: 1.71 &plusmn; 0.16 m/s sustained, 2.31 m/s peak</figcaption>
         </figure>
-        <div class="task-media-grid">
-          <figure class="media-tile">
-            <video autoplay muted loop playsinline controls preload="metadata" aria-label="Receiving a fast incoming pass with a single first touch">
-              <source src="./static/videos/receive_first_touch.mp4" type="video/mp4">
-            </video>
-            <figcaption>Receiving a 5.2 m/s pass with a single first touch</figcaption>
-          </figure>
-          <figure class="media-tile">
-            <video autoplay muted loop playsinline controls preload="metadata" aria-label="Dribbling from 10 meters away and shooting into the goal">
-              <source src="./static/videos/dribble_to_shoot.mp4" type="video/mp4">
-            </video>
-            <figcaption>Dribble 10 m, then shoot at a commanded 10 m/s</figcaption>
-          </figure>
-          <figure class="media-tile">
-            <video autoplay muted loop playsinline controls preload="metadata" aria-label="Dribbling into a directed pass">
-              <source src="./static/videos/dribble_to_pass.mp4" type="video/mp4">
-            </video>
-            <figcaption>Dribble-to-pass transition</figcaption>
-          </figure>
-          <figure class="media-tile">
-            <video autoplay muted loop playsinline controls preload="metadata" aria-label="Sharp 135 degree dribbling turn">
-              <source src="./static/videos/dribble_sharp_turn.mp4" type="video/mp4">
-            </video>
-            <figcaption>Sharp 135&deg; turns while dribbling</figcaption>
-          </figure>
-        </div>
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Sharp 135 degree dribbling turn">
+            <source src="./static/videos/dribble_sharp_turn.mp4" type="video/mp4">
+          </video>
+          <figcaption>Sharp 135&deg; turns while dribbling</figcaption>
+        </figure>
+      </div>
+      <div class="full-bleed-media three-up-media full-bleed-media--joined">
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Receiving an incoming pass with a delicate first touch">
+            <source src="./static/videos/receive_first_touch.mp4" type="video/mp4">
+          </video>
+          <figcaption>Delicate first touch when receiving</figcaption>
+        </figure>
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Dribbling into a shot">
+            <source src="./static/videos/dribble_to_shoot.mp4" type="video/mp4">
+          </video>
+          <figcaption>Dribble-to-shoot transition</figcaption>
+        </figure>
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Dribbling into a directed pass">
+            <source src="./static/videos/dribble_to_pass.mp4" type="video/mp4">
+          </video>
+          <figcaption>Dribble-to-pass transition</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -265,19 +263,18 @@
         </div>
       </div>
 
-      <!-- TODO: replace placeholder videos with baseline failure footage -->
       <div class="full-bleed-media two-up-media">
         <figure class="media-tile">
-          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Baseline policy losing the ball due to perception mismatch">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Simulation and hardware side by side: perception gaps cause unexpected foot-ball contacts">
             <source src="./static/videos/baseline_perception_fail.mp4" type="video/mp4">
           </video>
-          <figcaption>Baseline: perception mismatch during fast motion</figcaption>
+          <figcaption>Perception gaps cause unexpected foot-ball contacts</figcaption>
         </figure>
         <figure class="media-tile">
-          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Baseline policy with conservative, slow dribbling">
-            <source src="./static/videos/baseline_conservative.mp4" type="video/mp4">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Simulation and hardware side by side: actuator gaps cause stumbling">
+            <source src="./static/videos/baseline_actuator_fail.mp4" type="video/mp4">
           </video>
-          <figcaption>Baseline: conservative dribbling under broad randomization</figcaption>
+          <figcaption>Actuator gaps cause stumbling</figcaption>
         </figure>
       </div>
 
@@ -410,28 +407,6 @@
           </tbody>
         </table>
       </div>
-
-      <!-- TODO: replace placeholder videos with square-steering footage -->
-      <div class="full-bleed-media three-up-media">
-        <figure class="media-tile">
-          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Square steering with the domain randomization policy">
-            <source src="./static/videos/square_dr.mp4" type="video/mp4">
-          </video>
-          <figcaption>DR policy</figcaption>
-        </figure>
-        <figure class="media-tile">
-          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Square steering with the linear perception model policy">
-            <source src="./static/videos/square_linear.mp4" type="video/mp4">
-          </video>
-          <figcaption>Linear perception model policy</figcaption>
-        </figure>
-        <figure class="media-tile">
-          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Square steering with the PAM policy">
-            <source src="./static/videos/square_pam.mp4" type="video/mp4">
-          </video>
-          <figcaption>PAM policy</figcaption>
-        </figure>
-      </div>
     </section>
 
     <section class="section" id="wb-uan" aria-labelledby="wb-uan-title">
@@ -454,6 +429,13 @@
             </p>
           </div>
         </div>
+
+        <figure class="media-figure media-figure--framed media-figure--natural">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Replaying hardware commands in simulation with and without WB-UAN">
+            <source src="./static/videos/wbuan_rollout.mp4" type="video/mp4">
+          </video>
+        </figure>
+        <p class="media-caption">Replaying recorded hardware commands in simulation: WB-UAN rollouts (teal) track the hardware reference (white) more closely than the simulator without a residual (orange).</p>
 
         <div class="results-grid">
           <table class="results-table">
@@ -514,6 +496,13 @@
           </div>
         </div>
 
+        <figure class="media-figure media-figure--framed media-figure--natural">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Switching from dribbling to shooting in simulation, with and without distributional skill chaining">
+            <source src="./static/videos/dsc_sim.mp4" type="video/mp4">
+          </video>
+        </figure>
+        <p class="media-caption">Switching from dribbling to shooting in simulation: a striking policy trained from random initial states (left) versus one finetuned with distributional skill chaining (right).</p>
+
         <table class="results-table results-table--narrow">
           <caption>Real-world skill transitions (successes out of 5 trials)</caption>
           <thead>
@@ -524,6 +513,44 @@
             <tr class="is-ours"><td>Chaining + PAM + WB-UAN</td><td>5/5</td><td>5/5</td></tr>
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <section class="section" id="more" aria-labelledby="more-title">
+      <div class="container is-max-desktop">
+        <div class="content-column">
+          <p class="eyebrow">More on hardware</p>
+          <h2 id="more-title" class="title is-1 is-size-3-mobile">Receiving, ball skills, and playing with people</h2>
+        </div>
+      </div>
+
+      <div class="full-bleed-media two-up-media">
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Receiving a pass and dribbling away">
+            <source src="./static/videos/receive_to_dribble.mp4" type="video/mp4">
+          </video>
+          <figcaption>Receive-to-dribble</figcaption>
+        </figure>
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Receiving a pass and passing it on, sped up 5 times">
+            <source src="./static/videos/receive_to_pass.mp4" type="video/mp4">
+          </video>
+          <figcaption>Receive-to-pass (5&times; speed)</figcaption>
+        </figure>
+      </div>
+      <div class="full-bleed-media two-up-media full-bleed-media--joined">
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Shifty ball skills">
+            <source src="./static/videos/shifty_ball_skills.mp4" type="video/mp4">
+          </video>
+          <figcaption>Shifty ball skills</figcaption>
+        </figure>
+        <figure class="media-tile">
+          <video autoplay muted loop playsinline controls preload="metadata" aria-label="Playing soccer with people">
+            <source src="./static/videos/human_robot_interaction.mp4" type="video/mp4">
+          </video>
+          <figcaption>Human-robot interaction</figcaption>
+        </figure>
       </div>
     </section>
 
