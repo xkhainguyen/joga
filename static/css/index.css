@@ -2,9 +2,12 @@
   --ink: #17202a;
   --muted: #5d6875;
   --line: #dfe4ea;
-  --surface: #f5f7fa;
-  --accent: #3273dc;
-  --accent-dark: #2255a5;
+  --surface: #f2f4ea;
+  --accent: #4bc1a0;
+  --accent-dark: #d05657;
+  --sage: #c9d1a5;
+  --orange: #e1814c;
+  --red: #d05657;
   --green: #167c3b;
   --joga: #4bc1a0;
 }
@@ -25,7 +28,7 @@ button:focus-visible,
 summary:focus-visible,
 video:focus-visible {
   border-radius: 3px;
-  outline: 3px solid #ffdd57;
+  outline: 3px solid var(--orange);
   outline-offset: 3px;
 }
 
@@ -531,8 +534,8 @@ video:focus-visible {
 
 .limitations-panel {
   align-items: start;
-  border: 1px solid #e4c78c;
-  border-left: 6px solid #d09b2c;
+  border: 1px solid var(--sage);
+  border-left: 6px solid var(--orange);
   border-radius: 8px;
   display: grid;
   gap: 3rem;
@@ -836,7 +839,7 @@ video:focus-visible {
 }
 
 .results-table tr.is-ours td {
-  background: rgba(50, 115, 220, 0.08);
+  background: rgba(75, 193, 160, 0.16);
   font-weight: 700;
 }
 
@@ -957,4 +960,30 @@ video:focus-visible {
 .hero.is-link .title.publication-title,
 .joga-name {
   color: var(--joga);
+}
+
+/* Palette: teal #4BC1A0, sage #C9D1A5, orange #E1814C, red #D05657 */
+a,
+.content a {
+  color: var(--red);
+}
+
+a:hover,
+.content a:hover {
+  color: var(--orange);
+}
+
+.hero a,
+.hero a:hover,
+.footer a:hover {
+  color: inherit;
+}
+
+.step-number {
+  color: var(--ink);
+}
+
+.section--tinted {
+  border-bottom: 1px solid rgba(201, 209, 165, 0.6);
+  border-top: 1px solid rgba(201, 209, 165, 0.6);
 }
