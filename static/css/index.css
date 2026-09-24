@@ -856,3 +856,24 @@ video:focus-visible {
     overflow-x: auto;
   }
 }
+
+/* Seven-author team row */
+.team-grid--seven {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.team-grid--seven .author-photo {
+  width: 96px;
+}
+
+@media screen and (max-width: 1023px) {
+  .team-grid--seven {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .team-grid--seven {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

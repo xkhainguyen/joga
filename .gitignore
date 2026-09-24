@@ -5,3 +5,6 @@ Icon?
 
 # editor
 *.swp
+
+# raw video exports (compress before committing)
+static/videos/tech_summary.mp4
