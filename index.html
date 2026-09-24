@@ -209,6 +209,12 @@
             </p>
           </div>
         </div>
+
+        <figure class="paper-figure">
+          <img src="./static/images/fig1_skills.jpg" width="2000" height="1262" loading="lazy"
+            alt="Onboard camera views and third-person frames of the robot receiving a 5.2 m/s pass with a first touch, and dribbling into a shot on goal">
+          <figcaption>(A) A single first touch with the outside of the right foot receives a fast 5.2 m/s pass. (B) The robot dribbles from 10 m away and strikes the ball into the goal with a commanded ball speed of 10 m/s. Insets show the onboard camera; green boxes are detector outputs and orange arrows are ball joystick commands.</figcaption>
+        </figure>
       </div>
 
       <div class="full-bleed-media two-up-media">
@@ -321,21 +327,26 @@
           </li>
         </ol>
 
-        <!-- TODO: add Joga system diagram (paper Fig. 2) -->
         <figure class="paper-figure">
-          <div class="figure-placeholder" role="img" aria-label="Placeholder for the Joga system diagram">
-            System diagram coming soon
-          </div>
+          <img src="./static/images/system_diagram.png" width="2400" height="688" loading="lazy"
+            alt="Joga system diagram: PAM training on paired MoCap and detector data, WB-UAN training on proprioceptive replay, and skill policy training and chaining in the aligned simulator">
           <figcaption>
             (a) Train the PAM on paired detector bounding boxes, proprioception, and motion capture. (b) Train the WB-UAN on proprioceptive replay data to align simulated and real actuation. (c) Train soccer skill policies in the aligned simulator; finetune dribbling with the WB-UAN for high speeds, and finetune passing and shooting from dribbling states for skill chaining.
           </figcaption>
         </figure>
 
-        <div class="content-column content">
+        <div class="neck-grid">
+          <div class="content">
           <h3 class="title is-4">A neck built for the sim-to-real gap</h3>
           <p>
             The neck mounts directly to the torso and is driven by two DYNAMIXEL XC330-M288-T servos. It deliberately avoids external linkages, gears, and bearings: more complex transmissions introduce backlash, compliance, slippage, and calibration error, which slow the neck down and widen the sim-to-real gap. The simple design gives a large range of motion and speed for tracking the ball through robot and ball motion, and after a simple system identification it needs <strong>no neck domain randomization</strong> during policy training.
           </p>
+          </div>
+          <figure class="paper-figure paper-figure--plain neck-figure">
+            <img src="./static/images/neck_cad.png" width="665" height="940" loading="lazy"
+              alt="CAD model of the torso-mounted 2-DoF yaw-pitch neck with the RGB camera">
+            <figcaption>Torso-mounted 2-DoF yaw-pitch neck.</figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -365,11 +376,9 @@
         </figure>
 
         <div class="state-figure-grid">
-          <!-- TODO: add PAM fit figure (paper Fig. 3a) -->
-          <figure class="paper-figure paper-figure--plain">
-            <div class="figure-placeholder" role="img" aria-label="Placeholder for PAM fitting results">
-              PAM fitting figure coming soon
-            </div>
+          <figure class="paper-figure paper-figure--plain paper-figure--capped">
+            <img src="./static/images/fig3a_pam_fit.png" width="920" height="920" loading="lazy"
+              alt="Depth bias and depth noise of onboard ball detection versus range and base angular velocity, for ground truth, PAM, linear, and DR models">
             <figcaption>On held-out hardware data, PAM captures the bias and noise of onboard ball detection against both range and ego-motion; linear and DR baselines under- or over-estimate it.</figcaption>
           </figure>
           <figure class="paper-figure paper-figure--plain">
@@ -387,6 +396,12 @@
             <figcaption>An operator, blind to the policy, joysticks the robot to dribble a 5 m square.</figcaption>
           </figure>
         </div>
+
+        <figure class="paper-figure">
+          <img src="./static/images/fig3b_square_steering.jpg" width="1680" height="633" loading="lazy"
+            alt="Leg-odometry trajectories of the PAM, linear, and DR policies on the square course, with snapshots of the PAM policy">
+          <figcaption>Square-steering trajectories from leg odometry on successful runs: the operator steers the PAM policy around the square more easily than the linear and DR baselines.</figcaption>
+        </figure>
 
         <div class="content-column content">
           <p>
@@ -478,6 +493,22 @@
             With corrected actuator dynamics, the dribbling policy is the most stable and precise on sharp turns and pushes both sustained and peak ball speed well above the PAM-only policy, while remaining easier for a blind operator to control.
           </p>
         </div>
+
+        <figure class="paper-figure">
+          <img src="./static/images/fig4b_135_turns.jpg" width="2400" height="468" loading="lazy"
+            alt="Snapshot sequence of the robot dribbling through a sharp 135 degree turn">
+          <figcaption>A sharp 135&deg; turn at 1.2 m/s with the PAM + WB-UAN policy.</figcaption>
+        </figure>
+
+        <figure class="paper-figure">
+          <div class="figure-pair">
+            <img src="./static/images/fig4c_high_speed_snapshot.jpg" width="2163" height="649" loading="lazy"
+              alt="Overlaid snapshots of high-speed dribbling over 7 m">
+            <img src="./static/images/fig4c_high_speed_plot.png" width="1573" height="646" loading="lazy"
+              alt="Ball trajectories colored by mean ball speed for the PAM and PAM plus WB-UAN policies">
+          </div>
+          <figcaption>High-speed dribbling over 7 m. With corrected actuator dynamics, PAM + WB-UAN sustains 1.7 m/s (peak 2.3 m/s) with a tighter trajectory spread than PAM alone.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -502,6 +533,12 @@
           </video>
         </figure>
         <p class="media-caption">Switching from dribbling to shooting in simulation: a striking policy trained from random initial states (left) versus one finetuned with distributional skill chaining (right).</p>
+
+        <figure class="paper-figure paper-figure--narrow">
+          <img src="./static/images/fig5_skill_chaining_sim.png" width="1600" height="874" loading="lazy"
+            alt="Bar chart of miss rate, fall rate, speed error, and heading error for passing and shooting, with and without skill chaining">
+          <figcaption>In simulation, finetuning over the dribbling state distribution lowers miss rate, fall rate, strike speed error, and heading error for both passing and shooting (lower is better).</figcaption>
+        </figure>
 
         <table class="results-table results-table--narrow">
           <caption>Real-world skill transitions (successes out of 5 trials)</caption>
