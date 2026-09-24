@@ -6,6 +6,7 @@
   --accent: #3273dc;
   --accent-dark: #2255a5;
   --green: #167c3b;
+  --joga: #4bc1a0;
 }
 
 html {
@@ -950,4 +951,10 @@ video:focus-visible {
   display: block;
   margin: 0 auto;
   max-width: 420px;
+}
+
+/* Joga brand color */
+.hero.is-link .title.publication-title,
+.joga-name {
+  color: var(--joga);
 }
