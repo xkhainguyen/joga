@@ -993,9 +993,3 @@ a:hover,
   font-size: 0.9rem;
   font-style: italic;
 }
-
-.media-note {
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-style: italic;
-}
