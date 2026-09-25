@@ -13,7 +13,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=joga-4">
+  <link rel="stylesheet" href="./static/css/index.css?v=joga-5">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script defer src="./static/js/index.js"></script>
@@ -676,71 +676,33 @@
             <details>
               <summary>How does the operator joystick the robot?</summary>
               <div class="pad-map">
-                <svg class="pad-svg" viewBox="0 0 440 300" role="img" aria-labelledby="pad-title">
-                  <title id="pad-title">Game controller button map for operating the robot</title>
-                  <rect class="pad-ctl pad-safety" x="92" y="6" width="70" height="22" rx="9"/>
-                  <text class="pad-lbl" x="127" y="21">L2</text>
-                  <rect class="pad-ctl pad-setup" x="92" y="34" width="70" height="16" rx="6"/>
-                  <text class="pad-lbl pad-lbl--sm" x="127" y="45.5">L1</text>
-                  <rect class="pad-ctl pad-motion" x="278" y="6" width="70" height="22" rx="9"/>
-                  <text class="pad-lbl" x="313" y="21">R2</text>
-                  <rect class="pad-ctl pad-idle" x="278" y="34" width="70" height="16" rx="6"/>
-                  <text class="pad-lbl pad-lbl--sm pad-lbl--idle" x="313" y="45.5">R1</text>
-                  <path class="pad-body" d="M98 70 C98 62 108 58 120 58 L320 58 C332 58 342 62 342 70 L392 212 C408 262 382 294 348 290 C318 287 302 262 288 238 L152 238 C138 262 122 287 92 290 C58 294 32 262 48 212 Z"/>
-                  <rect class="pad-touch" x="168" y="70" width="104" height="58" rx="10"/>
-                  <rect class="pad-ctl pad-skill" x="142" y="78" width="12" height="22" rx="5"/>
-                  <text class="pad-cap" x="148" y="116">Create</text>
-                  <rect class="pad-ctl pad-setup" x="286" y="78" width="12" height="22" rx="5"/>
-                  <text class="pad-cap" x="292" y="116">Options</text>
-                  <g class="pad-dpad">
-                    <rect class="pad-ctl pad-skill" x="107" y="124" width="22" height="24" rx="4"/>
-                    <rect class="pad-ctl pad-skill" x="129" y="146" width="24" height="22" rx="4"/>
-                    <rect class="pad-ctl pad-skill" x="107" y="166" width="22" height="24" rx="4"/>
-                    <rect class="pad-ctl pad-skill" x="83" y="146" width="24" height="22" rx="4"/>
-                    <text class="pad-glyph" x="118" y="141">&#9650;</text>
-                    <text class="pad-glyph" x="142" y="162">&#9654;</text>
-                    <text class="pad-glyph" x="118" y="183">&#9660;</text>
-                    <text class="pad-glyph" x="94" y="162">&#9664;</text>
-                  </g>
-                  <circle class="pad-ctl pad-safety" cx="322" cy="130" r="14"/>
-                  <text class="pad-glyph" x="322" y="135">&#9651;</text>
-                  <circle class="pad-ctl pad-setup" cx="350" cy="158" r="14"/>
-                  <text class="pad-glyph" x="350" y="163">&#9675;</text>
-                  <circle class="pad-ctl pad-strike" cx="322" cy="186" r="14"/>
-                  <text class="pad-glyph" x="322" y="191">&#10005;</text>
-                  <circle class="pad-ctl pad-strike" cx="294" cy="158" r="14"/>
-                  <text class="pad-glyph" x="294" y="163">&#9633;</text>
-                  <circle class="pad-ctl pad-motion" cx="172" cy="200" r="24"/>
-                  <circle class="pad-stick-top" cx="172" cy="200" r="13"/>
-                  <text class="pad-cap" x="172" y="254">L stick</text>
-                  <circle class="pad-ctl pad-motion" cx="268" cy="200" r="24"/>
-                  <circle class="pad-stick-top" cx="268" cy="200" r="13"/>
-                  <text class="pad-cap" x="268" y="254">R stick</text>
-                </svg>
+                <figure class="pad-figure">
+                  <svg class="pad-svg" viewBox="0 0 1000 723" role="img" aria-labelledby="pad-title">
+                    <title id="pad-title">PS5 controller with the buttons used to operate the robot highlighted</title>
+                    <image href="./static/images/dualsense.jpg" x="0" y="0" width="1000" height="723"/>
+                    <circle class="pad-ring pad-skill" cx="227" cy="172" r="84"/>
+                    <circle class="pad-ring pad-motion" cx="373" cy="288" r="66"/>
+                    <circle class="pad-ring pad-motion" cx="668" cy="288" r="66"/>
+                    <circle class="pad-ring pad-strike" cx="735" cy="172" r="36"/>
+                    <circle class="pad-ring pad-strike" cx="803" cy="238" r="36"/>
+                    <g class="pad-badge pad-skill"><circle cx="118" cy="92" r="24"/><text x="118" y="101">1</text></g>
+                    <g class="pad-badge pad-motion"><circle cx="300" cy="372" r="24"/><text x="300" y="381">2</text></g>
+                    <g class="pad-badge pad-motion"><circle cx="742" cy="372" r="24"/><text x="742" y="381">3</text></g>
+                    <g class="pad-badge pad-motion"><circle cx="880" cy="34" r="24"/><text x="880" y="43">4</text></g>
+                    <g class="pad-badge pad-strike"><circle cx="672" cy="130" r="24"/><text x="672" y="139">5</text></g>
+                    <g class="pad-badge pad-strike"><circle cx="870" cy="282" r="24"/><text x="870" y="291">6</text></g>
+                  </svg>
+                  <figcaption>Photo: <a href="https://commons.wikimedia.org/wiki/File:Playstation_5_DualSense_controller_in_Midnight_Black,_2026-02-07_(front).jpg">Chris Woodrich</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, via Wikimedia Commons; annotations added.</figcaption>
+                </figure>
 
-                <div class="pad-legend">
-                  <p class="pad-group"><span class="pad-swatch pad-motion"></span>Motion</p>
-                  <ul>
-                    <li><kbd>L stick</kbd> Walk velocity; while dribbling, the target ball velocity. Also aims passes and shots.</li>
-                    <li><kbd>R stick</kbd> Turn.</li>
-                    <li><kbd>R2</kbd> Hold to sprint (dribble speed cap 1.2 &rarr; 2.5 m/s); during a strike, kick straight ahead.</li>
-                  </ul>
-                  <p class="pad-group"><span class="pad-swatch pad-skill"></span>Skills</p>
-                  <ul>
-                    <li><kbd>&#9650;</kbd> Walk &middot; <kbd>&#9654;</kbd> Dribble &middot; <kbd>&#9660;</kbd> Receive &middot; <kbd>&#9664;</kbd> Toggle pass / shoot mode</li>
-                    <li><kbd>Create</kbd> Scripted turn-around dribble (press once: 135&deg;, twice: 180&deg;).</li>
-                  </ul>
-                  <p class="pad-group"><span class="pad-swatch pad-strike"></span>Strikes (tap: approach and kick within 5 s)</p>
-                  <ul>
-                    <li><kbd>&#9633;</kbd> Hard: 5 m/s pass or 8 m/s shot.</li>
-                    <li><kbd>&#10005;</kbd> Soft: 3 m/s pass or 5 m/s shot.</li>
-                  </ul>
-                  <p class="pad-group"><span class="pad-swatch pad-safety"></span>Safety &amp; <span class="pad-swatch pad-setup"></span>setup</p>
-                  <ul>
-                    <li><kbd>L2</kbd> Hold as the deadman switch. <kbd>&#9651;</kbd> Stop (damping).</li>
-                    <li><kbd>L1</kbd> Assume initial pose &middot; <kbd>Options</kbd> Arm policy &middot; <kbd>&#9675;</kbd> Re-initialize pose.</li>
-                  </ul>
-                </div>
+                <ol class="pad-legend">
+                  <li class="pad-skill"><strong>D-pad: skill.</strong> <kbd>&#9650;</kbd> walk &middot; <kbd>&#9654;</kbd> dribble &middot; <kbd>&#9660;</kbd> receive &middot; <kbd>&#9664;</kbd> toggle pass / shoot mode.</li>
+                  <li class="pad-motion"><strong>Left stick.</strong> Walk velocity; while dribbling, the target ball velocity. Also aims passes and shots.</li>
+                  <li class="pad-motion"><strong>Right stick.</strong> Turn.</li>
+                  <li class="pad-motion"><strong>R2 (hold).</strong> Sprint: dribble speed cap 1.2 &rarr; 2.5 m/s. During a strike, kick straight ahead.</li>
+                  <li class="pad-strike"><strong><kbd>&#9633;</kbd> tap: hard strike.</strong> 5 m/s pass or 8 m/s shot.</li>
+                  <li class="pad-strike"><strong><kbd>&#10005;</kbd> tap: soft strike.</strong> 3 m/s pass or 5 m/s shot. After a tap, the robot approaches and kicks within 5 s.</li>
+                </ol>
               </div>
             </details>
 
