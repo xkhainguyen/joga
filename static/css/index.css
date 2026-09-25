@@ -988,8 +988,105 @@ a:hover,
   border-top: 1px solid rgba(201, 209, 165, 0.6);
 }
 
-.media-note {
-  color: var(--muted);
+/* Controller button map (Q&A) */
+.pad-map {
+  align-items: start;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  margin-top: 0.75rem;
+}
+
+.pad-svg {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.pad-body {
+  fill: #fbfcf7;
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.pad-touch {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 2;
+}
+
+.pad-ctl {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.pad-motion { background: var(--sage); fill: var(--sage); }
+.pad-skill { background: var(--accent); fill: var(--accent); }
+.pad-strike { background: var(--orange); fill: var(--orange); }
+.pad-safety { background: var(--red); fill: var(--red); }
+.pad-setup { background: #fff; fill: #fff; }
+.pad-idle { fill: #eef0e6; stroke: var(--line); }
+
+.pad-stick-top {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+
+.pad-lbl,
+.pad-glyph,
+.pad-cap {
+  fill: var(--ink);
+  font-family: 'Google Sans', sans-serif;
+  text-anchor: middle;
+}
+
+.pad-lbl { font-size: 13px; font-weight: 700; }
+.pad-lbl--sm { font-size: 10px; }
+.pad-lbl--idle { fill: var(--muted); }
+.pad-glyph { font-size: 13px; font-weight: 700; }
+.pad-cap { fill: var(--muted); font-size: 10px; }
+
+.pad-legend {
   font-size: 0.9rem;
-  font-style: italic;
+}
+
+.pad-legend ul {
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+}
+
+.pad-legend li {
+  margin: 0.25rem 0;
+}
+
+.pad-group {
+  font-weight: 700;
+  margin: 0 0 0.2rem !important;
+}
+
+.pad-swatch {
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  display: inline-block;
+  height: 0.8rem;
+  margin: 0 0.35rem 0 0;
+  vertical-align: -0.05rem;
+  width: 0.8rem;
+}
+
+.pad-legend kbd {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.8rem;
+  padding: 0 0.3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .pad-map {
+    grid-template-columns: 1fr;
+  }
 }
